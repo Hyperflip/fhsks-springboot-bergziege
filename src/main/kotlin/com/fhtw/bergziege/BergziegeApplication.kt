@@ -1,5 +1,6 @@
 package com.fhtw.bergziege
 
+import com.fhtw.bergziege.routing.MainController
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
