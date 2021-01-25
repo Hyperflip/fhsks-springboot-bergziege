@@ -1,13 +1,13 @@
-package com.fhtw.bergziege.author
+package com.fhtw.bergziege.landmark
 
 import javax.persistence.*
 
 @Entity     // hibernate treats this class as a table of the database
-data class Author(
+data class Landmark(
     val name: String,
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="author_id")
+    @Column(name="landmark_id")
     val id: Long? = null
 )

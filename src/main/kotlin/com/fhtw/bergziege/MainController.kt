@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody
 public class MainController {
 
     @GetMapping()
-    @ResponseBody
-    private fun greetings(): String {
-        return "Hello World.";
+    fun greetings(): String {
+        return "index"
+    }
+
+    @GetMapping("/createArticle")
+    fun getArticleForm(): String {
+        return "createArticle"
     }
 }

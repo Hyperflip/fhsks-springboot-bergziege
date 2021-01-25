@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Bergziege</title>
+		</head>
+	<body>
+		<h1>Add Article</h1>
+		<form action="/api/article/add" method="post">
+			<label for="title">Title:</label><br>
+			<input id="title" name="title" type="text">
+			<br>
+			<label for="authorName">Author:</label><br>
+			<input id="authorName" name="authorName" type="text">
+			<br>
+			<label for="landmarkName">Landmark:</label><br>
+			<input id="landmarkName" name="landmarkName" type="text">
+			<br>
+			<label for="content">Content:</label><br>
+			<textarea id="content" name="content" cols="40" rows="10"></textarea>
+			<br>
+			<input type="submit" value="Publish">
+		</form>
+	</body>
+</html>

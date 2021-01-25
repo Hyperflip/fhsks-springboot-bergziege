@@ -1,0 +1,16 @@
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="article : ${articles}">
+        <td>
+            <a th:href="@{/api/article(id=${article.id})}">
+                <div th:text="${article.title}"></div>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
