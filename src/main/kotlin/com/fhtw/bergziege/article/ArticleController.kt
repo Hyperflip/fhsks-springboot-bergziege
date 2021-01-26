@@ -4,6 +4,8 @@ import com.fhtw.bergziege.author.Author
 import com.fhtw.bergziege.author.AuthorRepository
 import com.fhtw.bergziege.landmark.Landmark
 import com.fhtw.bergziege.landmark.LandmarkRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.*
 public class ArticleController constructor (
     private val articleRepository: ArticleRepository,
     private val authorRepository: AuthorRepository,
-    private val landMarkRepository: LandmarkRepository
+    private val landMarkRepository: LandmarkRepository,
+    @Autowired
+    private val kafkaTemplate: KafkaTemplate<String, Long>
 ) {
 
     @PostMapping("/add")
@@ -30,7 +34,7 @@ public class ArticleController constructor (
         // same with landmark
         val landmark: Landmark = landMarkRepository.findByName(landmarkName)[0]
 
-        val article: Article = Article(title, content, landmark, author)
+        val article: Article = Article(title, content, 0, landmark, author)
         articleRepository.save(article)
 
         return "Saved article '$title'"
@@ -43,6 +47,7 @@ public class ArticleController constructor (
         return "dashboard"
     }
 
+    // get article by id
     @GetMapping()
     fun getArticleById(@RequestParam id: Long, model: Model): String {
         var article: Article = articleRepository.findById(id).get()
@@ -52,9 +57,15 @@ public class ArticleController constructor (
         var author: Author = authorRepository.findById(authorId).get()
         var landmark: Landmark = landMarkRepository.findById(landmarkId).get()
 
+        article.viewCount++
+        articleRepository.save(article)
+
         model.addAttribute("article", article)
         model.addAttribute("author", author.name)
         model.addAttribute("landmark", landmark.name)
+
+        // send kafka message
+        kafkaTemplate.send("payment", authorId)
 
         return "articleView"
     }

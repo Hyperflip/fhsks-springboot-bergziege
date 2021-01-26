@@ -1,6 +1,7 @@
 package com.fhtw.bergziege.author
 
 import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 
 @Controller
@@ -13,12 +14,19 @@ public class AuthorController constructor (
 
     @PostMapping("/add")
     @ResponseBody
-    public fun addNewAuthor(@RequestParam name: String): String {
+    fun addNewAuthor(@RequestParam name: String): String {
         val author: Author = Author(name)
 
         authorRepository.save(author)
 
         return "Saved author $name"
     }
+
+    // TODO: return each authors payment stats
+    @GetMapping()
+    fun getAuthorStatsById(@RequestParam id: Long, model: Model): String {
+        return ""
+    }
+
 
 }

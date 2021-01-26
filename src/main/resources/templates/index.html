@@ -9,5 +9,23 @@
 		Click <a href = "./api/article/all">here</a> to see all ARTICLES. <br>
 		Click <a href = "./api/statistics/all">here</a> to see monthly STATISTICS. <br>
 		Click <a href = "./createArticle">here</a> to see create an ARTICLE. <br>
+
+		<table>
+			<thead>
+			<tr>
+				<th>Landmark</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="landmark : ${landmarks}">
+				<td>
+					<a th:href="@{/api/landmark(id=${landmark.id})}">
+						<div th:text="${landmark.name}"></div>
+					</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
 	</body>
 </html>

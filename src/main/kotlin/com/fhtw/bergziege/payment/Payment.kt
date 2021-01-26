@@ -1,19 +1,13 @@
-package com.fhtw.bergziege.article
+package com.fhtw.bergziege.payment
 
 import com.fhtw.bergziege.author.Author
 import com.fhtw.bergziege.landmark.Landmark
 import javax.persistence.*
 
 @Entity
-data class Article(
-    val title: String,
-    val content: String,
+data class Payment(
 
-    var viewCount: Int,
-
-    @ManyToOne
-    @JoinColumn(name="landmark_id")
-    val landmark: Landmark? = null,
+    val amount: Float,
 
     @ManyToOne
     @JoinColumn(name="author_id")
@@ -21,6 +15,8 @@ data class Article(
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="article_id")
+    @Column(name="payment_id")
     val id: Long? = null
-)
+
+) {
+}
